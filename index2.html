@@ -37,7 +37,28 @@
             </tr>
         </table>
 
-        <ul class="list-group">
+        <form>
+            <div class="mb-2">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id=""name>
+            </div>
+            <div class="mb-2">
+                <label for="address">Address</label>
+                <textarea id="address" class="form-control"></textarea>
+            </div>
+            <div class="mb-2">
+                <label for="gender">Gender</label>
+                <select id="gender" class="form-select">
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                </select>
+            </div>
+            
+            <button class="btn btn-secondary">Back</button>
+            <button class="btn btn-primary">Send</button>
+        </form>
+
+        <ul class="list-group mt-4">
             <li class="list-group-item">User One</li>
             <li class="list-group-item bg-info">User Two</li>
             <li class="list-group-item active">User Three</li>
