@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            color: blue;
+        }
+        a:hover {
+            color: red;
+        }
+        a:active {
+            color: green;
+        }
+
+        input[type=text] {
+            background: yellow;
+        }
+        input:focus {
+            background: cyan;
+        }
+
+        a[title] { /* attribute selector - title attribute - write with square bracket */
+            color: orange;
+        }
+        div > a { /* child a of div element */
+            color: green; 
+        }
+        div span a {
+            color: black;
+        }
+
+        .alert {
+            color: red;
+        }
+        #note {
+            color: green;
+        }
+
+        ul li:first-child {
+            color: red;
+        }
+        ul li:nth-child(3) {
+            color: green;
+        }
+        ul li:nth-child(2n) {
+            color: blue;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="#">North Chiang Mai University</a><br></br>
+
+    <input type="text">
+    <input type="submit"><br></br>
+
+    <a href="#" title="two">Link One</a>
+    <div>
+        <a href="#">Link Two</a><br>
+        <span>
+            <a href="#">Link Three</a>
+        </span>
+    </div>
+    
+    <p class="alert">Lorem ipsum dolor sit amet.</p>
+    <p id="note">Lorem ipsum dolor sit amet.</p>
+    <p class="alert">Lorem ipsum dolor sit amet.</p> 
+    
+    <ul>
+        <li>Item One</li>
+        <li>Item Two</li>
+        <li>Item Three</li>
+        <li>Item Four</li>
+        <li>Item Five</li>
+        <li>Item Six</li>
+    </ul>
+
+</body>
+</html>
