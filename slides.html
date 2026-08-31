@@ -56,11 +56,13 @@
     <script>
         var box = 1;
 
+        setInterval(next, 3000);
+
         function prev() {
-            document.querySelector("#box" + box).style.display = "none";
+            document.querySelector("#box" + box).style.display = "none";/* box1 ဖျောက် */
             box--;
             if(box < 1) box = 3;
-            document.querySelector("#box" + box).style.display = "block";
+            document.querySelector("#box" + box).style.display = "block";/* box2 ပြ */
         }
 
         function next() {

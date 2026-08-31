@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS array function3</title>
+</head>
+<body>
+    <script>
+        let data = [
+            { name: 'Htein', age: 22},
+            { name: 'Lynn', age: 20},
+            { name: 'Aung', age: 18},
+            { name: 'Khin', age: 25},
+            { name: 'Hnin', age: 19},
+        ];
+
+        let names = data.map(user => user.name);
+        let ages = data.map(user => user.age);
+
+        let u20 = data.filter(user => user.age <= 20);
+        
+        let result = data
+            .filter(user => user.age <= 20)
+            .map(user => user.name);
+    </script>
+</body>
+</html>
