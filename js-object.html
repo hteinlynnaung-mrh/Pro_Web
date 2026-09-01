@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Object</title>
+</head>
+<body>
+    <script>
+        // Objects
+
+        let user = {
+            name: "Bob",
+            hello: function() {
+                console.log(`Hello ${this.name}`);
+            }
+        }; 
+
+        class Animal {
+         // name = "Dog";
+            constructor(name) {
+                this.name = name;
+            }
+
+            hello() {
+                console.log(`Hello ${this.name}`);
+            }
+        }
+
+        class Dog extends Animal {
+            run() {
+                console.log(`${this.name} is running...`);
+            }
+        }
+
+    //  let dog = new Animal();
+        let dog = new Dog("Bobby");
+
+     // output -> user.hello() / dog.hello() / dog.run()  
+    </script>
+</body>
+</html>

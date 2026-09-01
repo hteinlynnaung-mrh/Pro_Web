@@ -9,10 +9,10 @@
     <script>
         let data = [
             { name: 'Htein', age: 22},
-            { name: 'Lynn', age: 20},
-            { name: 'Aung', age: 18},
-            { name: 'Khin', age: 25},
-            { name: 'Hnin', age: 19},
+            { name: 'Lynn',  age: 20},
+            { name: 'Aung',  age: 18},
+            { name: 'Khin',  age: 25},
+            { name: 'Hnin',  age: 19},
         ];
 
         let names = data.map(user => user.name);
@@ -23,6 +23,8 @@
         let result = data
             .filter(user => user.age <= 20)
             .map(user => user.name);
+
+     // output -> data / names / ages / u20 / result
     </script>
 </body>
 </html>
