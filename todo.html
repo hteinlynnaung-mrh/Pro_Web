@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+</head>
+<body>
+    <input type="text">
+    <button>Add</button>
+    <ul id="todo"></ul>
+
+    <script>
+        document.querySelector("input").onkeydown = e => { // use e variable to recall
+            if(e.key == "Enter") {
+                document.querySelector("button").onclick();
+                // recall the onclick function fo the button
+            }
+        }
+
+        document.querySelector("button").onclick = () => { 
+        // select the button and put the function() to the onclick of the button 
+        // this way of onclick adding is same as inserting at the button
+            let text = document.querySelector("input").value;
+            // take the data from the input "text" and select the input - take the value 
+            if(text == "") return false;
+            // if text equal blank, return (that can't continue process of the below)
+
+            createItem(text); // calling the text function
+
+            document.querySelector("input").value = "";
+            // After finish adding the value to the li,the input will be blank again
+            document.querySelector("input").focus();
+            // After finish adding the value to the li,the input will be focus again
+
+
+            function createItem(text) {
+                let li = document.createElement("li"); // create li inside the ul
+                li.textContent = text; // li is to be the text
+
+                document.querySelector("#todo").appendChild(li); 
+                // add the li to the #todo as the appendChild(adding more and more)
+            }
+        }
+        
+    </script>
+</body>
+</html>
