@@ -4,13 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
-    <input type="text">
-    <button>Add</button>
-    <ul id="todo"></ul>
+    <nav class="navbar bg-secondary navbar-dark">
+        <div class="container" style="max-width: 600px">
+            <a href="#" class="navbar-brand">
+                Todo List <span class="badge bg-danger ms-2">0</span>
+            </a>
+        </div>
+    </nav>
+    
+    <div class="container" style="max-width: 600px">
+        <div class="input-group my-4">
+            <input type="text" class="form-control">
+            <button class="btn btn-primary">Add</button>
+        </div>
+
+        <ul id="todo" class="list-group"></ul>
+        <ul id="done" class="list-group mt-4 opacity-50"></ul>
+    </div>
 
     <script>
+        let data = getData(); // take the present data
+        data.map(item => {
+            createItem(item.text); // calling the createItem function
+        });
+
+        function getData() { // using localStorage to get the data
+            return JSON.parse(localStorage.getItem("data")) || [];
+            // get the data with the JSON.parse (or) if the data don't have, take empty array
+        }
+
+        function saveData(text) {
+            let data = getData(); // take the present data
+            data.push({ text, done: false }); // adding more with the push
+            localStorage.setItem("data", JSON.stringify(data)); 
+            // save the adding data for one more time
+        }
+
+        function updateCount() {
+            document.querySelector(".badge").textContent = 
+            // select textContent from class="badge"
+                document.querySelectorAll("#todo li").length; 
+                // select all length from id="todo" 
+        }
+
         document.querySelector("input").onkeydown = e => { // use e variable to recall
             if(e.key == "Enter") {
                 document.querySelector("button").onclick();
@@ -27,20 +69,43 @@
             // if text equal blank, return (that can't continue process of the below)
 
             createItem(text); // calling the text function
+            updateCount(); // calling the update count
+            saveData(text); // when we click the button, that save the data in LocalStorage
 
             document.querySelector("input").value = "";
             // After finish adding the value to the li,the input will be blank again
             document.querySelector("input").focus();
             // After finish adding the value to the li,the input will be focus again
+        }    
 
+        function createItem(text) {
+            let li = document.createElement("li"); // create li inside the ul
+            li.classList.add("list-group-item"); // style the input li
+            li.textContent = text; // li is to be the text
 
-            function createItem(text) {
-                let li = document.createElement("li"); // create li inside the ul
-                li.textContent = text; // li is to be the text
-
-                document.querySelector("#todo").appendChild(li); 
-                // add the li to the #todo as the appendChild(adding more and more)
+            let check = document.createElement("a"); // create the check button as "a"
+            check.setAttribute("href", "#"); // "a" element must be included href attribute
+            check.classList.add("fa-solid", "fa-check", "me-2", "text-danger", "float-start"); // styling the check button
+            check.onclick = () => { 
+                document.querySelector("#done").appendChild(li); 
+                // When we tap the button,select the "done" list and put to the li
+                check.remove(); // remove the li can't to be tap again
+                updateCount(); // update count for the deleted items
             }
+            li.appendChild(check);
+
+            let del = document.createElement("a"); // create delete button as "a" element
+            del.setAttribute("href", "#"); // "a" element must be included href attribute
+            del.classList.add("fa-solid", "fa-trash", "text-danger", "float-end"); 
+            // styling the delete button
+            del.onclick = () => { // if we tap the delete button, remove this item
+                li.remove();
+                updateCount(); // update count for the deleted items
+            }
+            li.appendChild(del); // create del "a" element and del put to the li
+
+            document.querySelector("#todo").appendChild(li); 
+            // add the li to the #todo as the appendChild(adding more and more)
         }
         
     </script>

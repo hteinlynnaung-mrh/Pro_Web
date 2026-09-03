@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Local Storage</title>
+</head>
+<body>
+    <script>
+        let user = {name: 'Alice', age: 23}; // create user object
+
+        localStorage.setItem("user", user); // store the user object with the name "user"
+
+        localStorage.getItem("user"); // localStorage can only recieved the string
+        // So, that can only return as your user object like this output- '[object object]'
+
+        localStorage.setItem("user", JSON.stringify(user));
+        // So,we convert the user object to the string with the JSON.stringify
+
+        localStorage.getItem("user");
+        // output is like this string '{"name":"Alice","age":23}' 
+
+        JSON.parse(localStorage.getItem("user"));
+        // convert to the original object with the JSON.parse
+        // So, The output is like this original object {name: 'Alice', age: 23}
+        
+    </script>
+</body>
+</html>
