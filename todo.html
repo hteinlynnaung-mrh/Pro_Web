@@ -31,8 +31,10 @@
     <script>
         let data = getData(); // take the present data
         data.map(item => {
-            createItem(item.text); // calling the createItem function
+            createItem(item.text, item.done); // calling the createItem function
         });
+
+        updateCount();
 
         function getData() { // using localStorage to get the data
             return JSON.parse(localStorage.getItem("data")) || [];
@@ -44,6 +46,23 @@
             data.push({ text, done: false }); // adding more with the push
             localStorage.setItem("data", JSON.stringify(data)); 
             // save the adding data for one more time
+        }
+
+        function deleteData(text) {
+            let data = getData(); // read the present data
+            let result = data.filter(item => item.text != text); 
+            // When we delete the data on web,that also delete the localStorage data
+            localStorage.setItem("data", JSON.stringify(result)); 
+        }
+
+        function checkData(text) {
+            let data = getData(); // read the present data
+            let result = data.map(item => {
+                if(item.text == text) item.done = true; 
+                // When we tap the check,that show true in localStorage
+                return item;
+            });
+            localStorage.setItem("data", JSON.stringify(result)); 
         }
 
         function updateCount() {
@@ -78,7 +97,7 @@
             // After finish adding the value to the li,the input will be focus again
         }    
 
-        function createItem(text) {
+        function createItem(text, done = false) {
             let li = document.createElement("li"); // create li inside the ul
             li.classList.add("list-group-item"); // style the input li
             li.textContent = text; // li is to be the text
@@ -91,8 +110,10 @@
                 // When we tap the button,select the "done" list and put to the li
                 check.remove(); // remove the li can't to be tap again
                 updateCount(); // update count for the deleted items
+                checkData(text);
             }
-            li.appendChild(check);
+            
+            if(!done) li.appendChild(check);
 
             let del = document.createElement("a"); // create delete button as "a" element
             del.setAttribute("href", "#"); // "a" element must be included href attribute
@@ -101,11 +122,16 @@
             del.onclick = () => { // if we tap the delete button, remove this item
                 li.remove();
                 updateCount(); // update count for the deleted items
+                deleteData(text);
             }
             li.appendChild(del); // create del "a" element and del put to the li
 
-            document.querySelector("#todo").appendChild(li); 
-            // add the li to the #todo as the appendChild(adding more and more)
+            if(done) {
+                document.querySelector("#done").appendChild(li); 
+                // add the li to the #todo as the appendChild(adding more and more)
+            } else {
+                document.querySelector("#todo").appendChild(li); 
+            }
         }
         
     </script>
